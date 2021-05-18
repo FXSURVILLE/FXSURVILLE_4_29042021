@@ -106,6 +106,7 @@ mail.addEventListener('input',function validateMail(){
 // console.log(townLoc());
 // console.dir(townLoc());
 
+var radioChecked = true;
 
 // clic du bouton submit
 formSubmit.addEventListener('click', f_submit);
@@ -144,11 +145,18 @@ function f_submit(e){
           }else{
             if (quantity.value >= 1){ //tournois
               e.preventDefault();
-              radioLocation.className += " border-error";
-              where.textContent = "Veuillez selectionner une ville.";
-              where.className = "data-error";
-              // villes
-              
+              if (radioChecked === true){
+                where.textContent = "";
+                e.preventDefault();
+                // close modal form
+                validation.style.display = "block";
+                modalBody.style.display = "none";
+              }else{
+                e.preventDefault();
+                radioLocation.className += " border-error";
+                where.textContent = "Veuillez selectionner une ville.";
+                where.className = "data-error";
+              }
             }else{
               where.textContent = "";
               e.preventDefault();
