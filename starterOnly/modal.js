@@ -43,6 +43,7 @@ function launchModal() {
   modalbg.style.display = "block";
   validation.style.display = "none";
 }
+
 // added
 // close modal event
 modalClose.addEventListener("click", closeModal);
@@ -176,103 +177,3 @@ closeSubmit.addEventListener("click",function () {
   modalBody.style.display = "block";
   modalbg.style.display = "none";
 });
-
-
-// villes
-// document.querySelector("#radio_location").addEventListener('change',function(){
-//   var town = document.getElementsByName("location");
-//   for (var i = 0; i < town.length; i++){
-//     // console.log(town[i]);
-//     // console.dir(town[i]);
-//     if (town[i].checked) {
-//       radioLocation.style.border = "";
-//       where.textContent = "";
-//       // break;
-//     }else{
-//       e.preventDefault(); // bloque submit
-//       radioLocation.style.border = "3px red solid";
-//       where.textContent = "Veuillez selectionner une ville.";
-//       where.style.color = "red";
-//       where.style.fontSize = "10px";
-//     }
-//   }
-// });
-
-//villes
-// location2.addEventListener('input',function validateLocation(e){
-//   if (location2 != checked){ 
-//     e.preventDefault(); // bloque submit
-//     radioLocation.style.border = "3px red solid";
-//     where.textContent = "Veuillez selectionner une ville.";
-//     where.style.color = "red";
-//     where.style.fontSize = "10px";
-//   }else{
-//     radioLocation.style.border = "";
-//     where.textContent = "";
-//     return true;
-//   }
-// });
-
-// document.querySelector("#radio_location").addEventListener('change',function town(){
-//   for (var i = 0; i < locations.length; i++){
-//     if (locations[i].checked) break;
-//   }
-//   if (locations[i].checked === true) {
-//     var radioTown = true;
-//   }else{
-//     var radioTown = false;}
-// console.log(locations[i]);
-// console.dir(locations[i]);
-// console.log(radioTown);
-// console.dir(radioTown);
-// });
-
-// let selected=document.querySelector('input[type="radio"]:checked');
-
-// if (location2.checked === true){ //conditions
-//   if (checkBox1.checked == false){ //conditions
-//     e.preventDefault(); // bloque submit
-//     alert("Merci d'accepter les termes et conditions");
-//   }else{
-//   }
-// }else{
-//   e.preventDefault(); // bloque submit
-//   radioLocation.style.border = "3px red solid";
-//   where.textContent = "Veuillez selectionner une ville.";
-//   where.style.color = "red";
-//   where.style.fontSize = "10px";
-// }
-
-// if (formFirst && formLast && formMail && birthDate && ville && checkBox1){
-//   alert('active');
-// } else {
-//   alert('inactive');
-// }
-
-// validation prénom
-// if (prenom === /^[a-zA-Zéèç]+([-'\s][a-zA-Zéèç]?{2,}$/) {
-//   return true;
-// } else {
-// first.style.color = 'red';
-// }
-
-// bouton submit
-// formSubmit.addEventListener('click', f_submit);
-
-// radio_location
-// document.querySelector('form').addEventListener('change', function (){
-//   for (var i = 0; i < town.length; i++){
-//     if ( town[i].checked ) break;
-//   }
-// })
-
-//désactiver bouton
-// formSubmit.disabled = true;
-// formSubmit.style.backgroundColor = 'grey';
-
-/*
-"Veuillez entrer 2 caractères ou plus pour le champ du nom."
-"Vous devez choisir une option."
-"Vous devez vérifier que vous acceptez les termes et conditions."
-"Vous devez entrer votre date de naissance."
-*/
