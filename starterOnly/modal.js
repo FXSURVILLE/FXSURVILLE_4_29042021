@@ -107,7 +107,7 @@ mail.addEventListener('input',function validateMail(){
 // console.log(townLoc());
 // console.dir(townLoc());
 
-var radioChecked = true;
+var radioChecked = false;
 
 // clic du bouton submit
 formSubmit.addEventListener('click', f_submit);
@@ -146,18 +146,19 @@ function f_submit(e){
           }else{
             if (quantity.value >= 1){ //tournois
               e.preventDefault();
-              if (radioChecked === true){
-                where.textContent = "";
-                e.preventDefault();
-                // close modal form
-                validation.style.display = "block";
-                modalBody.style.display = "none";
-              }else{
-                e.preventDefault();
-                radioLocation.className += " border-error";
-                where.textContent = "Veuillez selectionner une ville.";
-                where.className = "data-error";
-              }
+              checkTownLocation();
+              // if (radioChecked === true){
+              //   where.textContent = "";
+              //   e.preventDefault();
+              //   // close modal form
+              //   validation.style.display = "block";
+              //   modalBody.style.display = "none";
+              // }else{
+              //   e.preventDefault();
+              //   radioLocation.className += " border-error";
+              //   where.textContent = "Veuillez selectionner une ville.";
+              //   where.className = "data-error";
+              // }
             }else{
               where.textContent = "";
               e.preventDefault();
@@ -177,3 +178,25 @@ closeSubmit.addEventListener("click",function () {
   modalBody.style.display = "block";
   modalbg.style.display = "none";
 });
+
+// villes checked
+function checkTownLocation() {
+  var checkboxes = document.getElementsByClassName('checkbox-input');
+  console.log(checkboxes);
+  for(var i = 0; i < checkboxes.length; i++) {
+    if(checkboxes[i].type == 'radio') {
+      var checkbox = checkboxes[i];
+      if(checkbox.checked) {
+        console.log(checkbox.value + " is checked");
+        where.textContent = "";
+        validation.style.display = "block";
+        modalBody.style.display = "none";
+      } else {
+        console.log(checkbox.value + " not checked");
+        radioLocation.className += " border-error";
+        where.textContent = "Veuillez selectionner une ville.";
+        where.className = "data-error";
+      }
+    }
+  }
+};

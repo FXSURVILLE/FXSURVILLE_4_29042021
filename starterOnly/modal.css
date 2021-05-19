@@ -249,7 +249,7 @@ input[data-error]::after {
   transition: 0.75s;
 }
 .border-error {
-  border: 2px solid #e54858;
+  border: 2px solid red;
 }
 .checkbox-label,
 .checkbox2-label {
