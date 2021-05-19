@@ -245,11 +245,11 @@ input[data-error]::after {
 .data-error {
   content: attr(data-error);
   font-size: 10px;
-  color: red;
+  color: #fe142f;
   transition: 0.75s;
 }
 .border-error {
-  border: 2px solid red;
+  border: 2px solid #fe142f;
 }
 .checkbox-label,
 .checkbox2-label {

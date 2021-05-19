@@ -8,33 +8,34 @@ function editNav() {
 }
 
 // DOM Elements
-const modalbg = document.querySelector(".bground");
-const modalBtn = document.querySelectorAll(".modal-btn");
-const formData = document.querySelectorAll(".formData");
-const modalBody = document.querySelector(".modal-body");
-const modalClose = document.querySelector(".close");
-let validation = document.getElementById("validation");
-let first = document.getElementById("first");
-let last = document.getElementById("last");
-let mail = document.getElementById("email");
-let birthDate = document.getElementById("birthdate");
-let quantity = document.getElementById("quantity");
-let checkBox1 = document.getElementById("checkbox1");
-let formSubmit = document.getElementById("btn-submit");
-let closeSubmit = document.getElementById("btn-close-modal");
-// erreurs
-let firstMissing = document.getElementById("first_missing");
-let lastMissing = document.getElementById("last_missing");
-let mailMissing = document.getElementById("mail_missing");
-let dateMissing = document.getElementById("birthdate_missing");
-let where = document.getElementById("where");
-let radioLocation = document.getElementById("radio_location");
-// encadrements
-let textNeeded = /^[a-zA-Zéèç-]{2,20}$/;
-let mailNeeded = /\S+@\S+\.\S+/;
-let dateNeeded = /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;
-// villes
-var locations = document.getElementsByName("location");
+const modalbg = document.querySelector(".bground"); // formulaire
+const modalBtn = document.querySelectorAll(".modal-btn"); // bouton ouverture du formulaire
+// const formData = document.querySelectorAll(".formData"); //non utilisé
+const modalBody = document.querySelector(".modal-body"); // modal
+const modalClose = document.querySelector(".close"); // bouton fermeture formulaire
+// Varriables éléments du formulaire
+var validation = document.getElementById("validation"); // bouton validation
+var first = document.getElementById("first"); // champ prénom
+var last = document.getElementById("last"); // champ nom
+var mail = document.getElementById("email"); // champ mail
+var birthDate = document.getElementById("birthdate"); // champ date de naissance
+var quantity = document.getElementById("quantity"); // champ nombre de participations
+var checkBox1 = document.getElementById("checkbox1"); // case conditions d'utilisation
+var formSubmit = document.getElementById("btn-submit"); // bouton validation formulaire
+var closeSubmit = document.getElementById("btn-close-modal"); // bouton fermeture remerciements
+var locations = document.getElementsByName("location"); // radios villes
+var radioLocation = document.getElementById("radio_location"); // message de selection des villes
+// gestion des messages d'erreurs
+var firstMissing = document.getElementById("first_missing"); // zone pour message d'erreur prénom
+var lastMissing = document.getElementById("last_missing"); // zone pour message d'erreur nom
+var mailMissing = document.getElementById("mail_missing"); // zone pour message d'erreur mail
+var dateMissing = document.getElementById("birthdate_missing"); // zone pour message d'erreur date de naissance
+var where = document.getElementById("where"); // zone pour message d'erreur ville manquante
+// Regex
+let textNeeded = /^[a-zA-Zéèç-]{2,20}$/;  // conditions nom/prénom
+let mailNeeded = /\S+@\S+\.\S+/; // conditions @mail
+let dateNeeded = /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/; // conditions date
+
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -43,8 +44,6 @@ function launchModal() {
   modalbg.style.display = "block";
   validation.style.display = "none";
 }
-
-// added
 // close modal event
 modalClose.addEventListener("click", closeModal);
 // close modal form
@@ -54,15 +53,14 @@ function closeModal() {
 
 //Etat textes en live
 //prénom
-first.addEventListener('input',function validateFirst(){
-  if (textNeeded.test(first.value) === false){ 
-    first.className += " border-error";
-    firstMissing.textContent = "Veuillez entrer 2 lettres ou plus pour votre prénom.";
-    firstMissing.className = "data-error";
-  }else{
-    first.className = "text-control";
-    firstMissing.textContent = "";
-    return true;
+first.addEventListener('input',function validateFirst(){ // écoute du champ
+  if (textNeeded.test(first.value) === false){ // si conditions du regex non remplies
+    first.className += " border-error"; // ajout classe pour modification du cadre avec CSS
+    firstMissing.textContent = "Veuillez entrer 2 lettres ou plus pour votre prénom."; // ajout message d'erreur
+    firstMissing.className = "data-error"; // classe pour modification du texte d'erreur avec CSS
+  }else{ // si conditions du regex remplies
+    first.className = "text-control"; // retour à la classe d'origine
+    firstMissing.textContent = ""; // retrait du message
   }
 });
 //nom
@@ -75,7 +73,6 @@ last.addEventListener('input',function validateLast(){
   }else{
     last.className = "text-control";
     lastMissing.textContent = "";
-    return true;
   }
 });
 //mail
@@ -87,10 +84,8 @@ mail.addEventListener('input',function validateMail(){
   }else{
     mail.className = "text-control";
     mailMissing.textContent = "";
-    return true;
   }
 });
-
 
 // // villes checked
 // document.querySelector("#radio_location").addEventListener('change',function townLoc(){
@@ -107,32 +102,35 @@ mail.addEventListener('input',function validateMail(){
 // console.log(townLoc());
 // console.dir(townLoc());
 
-var radioChecked = false;
+// var radioChecked = false;
 
 // clic du bouton submit
 formSubmit.addEventListener('click', f_submit);
-
+// vérification du formulaire
 function f_submit(e){
+  // vérification prénoms
   if (textNeeded.test(first.value) === false){ 
-    e.preventDefault();
+    e.preventDefault(); // bloque submit
     first.className += " border-error";
     firstMissing.textContent = "Veuillez entrer 2 lettres ou plus pour votre prénom.";
     firstMissing.className = "data-error";
   }else{
+    // vérification noms
     if (textNeeded.test(last.value) === false){
       e.preventDefault(); 
       last.className += " border-error";
-      firstMissing.className = "data-error";
       lastMissing.textContent = "Veuillez entrer 2 lettres ou plus pour votre nom.";
       lastMissing.className = "data-error";
     }else{
+      // vérification mail
       if (mailNeeded.test(mail.value) === false){
-        e.preventDefault(); // bloque submit
+        e.preventDefault();
         mail.className += " border-error";
         mailMissing.textContent = "Veuillez entrer une adresse valide.";
         mailMissing.className = "data-error";
       }else{
-        if (dateNeeded.test(birthDate.value) === false){ //birthdate
+        // vérification date de naissance
+        if (dateNeeded.test(birthDate.value) === false){
           e.preventDefault();
           birthDate.className += " border-error";
           dateMissing.textContent = "Veuillez entrer une date valide.";
@@ -140,12 +138,16 @@ function f_submit(e){
         }else{
           birthDate.className = "text-control";
           dateMissing.textContent = "";
-          if (checkBox1.checked !== true){ //conditions
+          // vérification du check des conditions
+          if (checkBox1.checked !== true){
             e.preventDefault();
+            // message d'alert pour la case non cochée
             alert("Merci d'accepter les termes et conditions");
           }else{
+            // vérification du nombre de participations
             if (quantity.value >= 1){ //tournois
               e.preventDefault();
+              // vérification de la ville si participation
               checkTownLocation();
               // if (radioChecked === true){
               //   where.textContent = "";
@@ -159,6 +161,7 @@ function f_submit(e){
               //   where.textContent = "Veuillez selectionner une ville.";
               //   where.className = "data-error";
               // }
+            // validé si jamais participé
             }else{
               where.textContent = "";
               e.preventDefault();
@@ -173,26 +176,20 @@ function f_submit(e){
   }
 }
 
-// close submit event
-closeSubmit.addEventListener("click",function () {
-  modalBody.style.display = "block";
-  modalbg.style.display = "none";
-});
-
-// villes checked
+// controle si radio activée
 function checkTownLocation() {
-  var checkboxes = document.getElementsByClassName('checkbox-input');
-  console.log(checkboxes);
-  for(var i = 0; i < checkboxes.length; i++) {
-    if(checkboxes[i].type == 'radio') {
-      var checkbox = checkboxes[i];
+  //vérifie les boutons radio
+  for(var i = 0; i < locations.length; i++) {
+    if(locations[i].type == 'radio') {
+      var checkbox = locations[i];
+      // si radio active, validation
       if(checkbox.checked) {
-        console.log(checkbox.value + " is checked");
+        // console.log(checkbox.value + " is checked");
         where.textContent = "";
         validation.style.display = "block";
         modalBody.style.display = "none";
       } else {
-        console.log(checkbox.value + " not checked");
+        // console.log(checkbox.value + " not checked");
         radioLocation.className += " border-error";
         where.textContent = "Veuillez selectionner une ville.";
         where.className = "data-error";
@@ -200,3 +197,9 @@ function checkTownLocation() {
     }
   }
 };
+
+// Ferme le message de remerciement (formulaire)
+closeSubmit.addEventListener("click",function () {
+  modalBody.style.display = "block";
+  modalbg.style.display = "none";
+});
