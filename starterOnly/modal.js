@@ -31,6 +31,7 @@ var lastMissing = document.getElementById("last_missing"); // zone pour message 
 var mailMissing = document.getElementById("mail_missing"); // zone pour message d'erreur mail
 var dateMissing = document.getElementById("birthdate_missing"); // zone pour message d'erreur date de naissance
 var where = document.getElementById("where"); // zone pour message d'erreur ville manquante
+var cb1Text = document.getElementById("cb1-text"); // couleur texte conditions
 // Regex
 let textNeeded = /^[a-zA-Zéèç-]{2,20}$/;  // conditions nom/prénom
 let mailNeeded = /\S+@\S+\.\S+/; // conditions @mail
@@ -87,51 +88,31 @@ mail.addEventListener('input',function validateMail(){
   }
 });
 
-// // villes checked
-// document.querySelector("#radio_location").addEventListener('change',function townLoc(){
-//   for (var i = 0; i < locations.length; i++){
-//     if (locations[i].checked) 
-//     break;
-//   }
-//   var town = locations[i];
-//   console.log(town);
-//   console.dir(town);
-//   return town;
-// });
-// // town();
-// console.log(townLoc());
-// console.dir(townLoc());
-
-// var radioChecked = false;
-
 // clic du bouton submit
 formSubmit.addEventListener('click', f_submit);
 // vérification du formulaire
-function f_submit(e){
+function f_submit(e){ 
+  e.preventDefault(); // bloque submit
   // vérification prénoms
-  if (textNeeded.test(first.value) === false){ 
-    e.preventDefault(); // bloque submit
+  if (textNeeded.test(first.value) === false){
     first.className += " border-error";
     firstMissing.textContent = "Veuillez entrer 2 lettres ou plus pour votre prénom.";
     firstMissing.className = "data-error";
   }else{
     // vérification noms
     if (textNeeded.test(last.value) === false){
-      e.preventDefault(); 
       last.className += " border-error";
       lastMissing.textContent = "Veuillez entrer 2 lettres ou plus pour votre nom.";
       lastMissing.className = "data-error";
     }else{
       // vérification mail
       if (mailNeeded.test(mail.value) === false){
-        e.preventDefault();
         mail.className += " border-error";
         mailMissing.textContent = "Veuillez entrer une adresse valide.";
         mailMissing.className = "data-error";
       }else{
         // vérification date de naissance
         if (dateNeeded.test(birthDate.value) === false){
-          e.preventDefault();
           birthDate.className += " border-error";
           dateMissing.textContent = "Veuillez entrer une date valide.";
           dateMissing.className = "data-error";
@@ -140,31 +121,18 @@ function f_submit(e){
           dateMissing.textContent = "";
           // vérification du check des conditions
           if (checkBox1.checked !== true){
-            e.preventDefault();
             // message d'alert pour la case non cochée
+            cb1Text.style.color = "#fe142f";
             alert("Merci d'accepter les termes et conditions");
           }else{
             // vérification du nombre de participations
+            cb1Text.style.color = "#fff";
             if (quantity.value >= 1){ //tournois
-              e.preventDefault();
               // vérification de la ville si participation
               checkTownLocation();
-              // if (radioChecked === true){
-              //   where.textContent = "";
-              //   e.preventDefault();
-              //   // close modal form
-              //   validation.style.display = "block";
-              //   modalBody.style.display = "none";
-              // }else{
-              //   e.preventDefault();
-              //   radioLocation.className += " border-error";
-              //   where.textContent = "Veuillez selectionner une ville.";
-              //   where.className = "data-error";
-              // }
             // validé si jamais participé
             }else{
               where.textContent = "";
-              e.preventDefault();
               // close modal form
               validation.style.display = "block";
               modalBody.style.display = "none";

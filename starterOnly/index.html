@@ -58,9 +58,6 @@
           <div class="modal-body">
             <form
               name="reserve"
-              action="index.html"
-              method="get"
-              onsubmit="return validate();"
             >
               <div
                 class="formData">
@@ -200,7 +197,7 @@
                 class="formData">
                 <input
                   class="checkbox-input" type="checkbox" id="checkbox1" checked />
-                <label class="checkbox2-label" for="checkbox1" required>
+                <label id="cb1-text" class="checkbox2-label" for="checkbox1" required>
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
                 </label>
@@ -223,7 +220,6 @@
           <div id="validation">
             <p id="thanks">Merci pour votre enregistrement</p>
             <button id="btn-close-modal"
-            type="submit"
             class="button"
             >
               Fermer
